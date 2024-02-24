@@ -23,12 +23,24 @@ function showBothChoices(bothChoices){
     console.log("Computer Choice : " + bothChoices.computerChoice);
     
 }
+
+function playOneRound(event){
+    let Choices = getBothChoices(event);
+    let playerSelection = Choices.playerChoice
+    let computerSelection  = Choices.computerChoice
+    console.log("player Choice : "+playerSelection)
+    console.log("computer Choice  : "+computerSelection)
+    // Logic to determine the winner of one round
+    if (playerSelection === computerSelection) {
+        return "It's a tie!";
+    } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
+               (playerSelection === "paper" && computerSelection === "rock") ||
+               (playerSelection === "scissors" && computerSelection === "paper")) {
+        console.log("You win!");
+    } else {
+        console.log("Computer wins!");
+    }
+}
 buttons.forEach((button) => {
-    button.addEventListener('click',function(event){
-         // Call myFunction and pass the event object
-    var Choices = getBothChoices(event);
-    
-    // Call handleValues and pass the returned values
-    showBothChoices(Choices);
-    })    
+    button.addEventListener('click',playOneRound)    
 });
