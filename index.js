@@ -1,9 +1,10 @@
 const container = document.querySelector('#container')
 const buttons = document.querySelectorAll('button')
 
-function setAlert(event) {
-    console.log(event.target.innerText)
+function playerSelection(event) {
+    let playerChoice = event.target.innerText
+    console.log("Player selected: " + playerChoice)
 }
 buttons.forEach((button) => {
-    button.addEventListener('click',setAlert)    
+    button.addEventListener('click',playerSelection)    
 });
