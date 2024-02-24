@@ -10,37 +10,52 @@ function getPlayerChoice(event){
     let playerChoice = event.target.innerText
     return playerChoice;
 }
-function getBothChoices(event){
-    let playerSelection = getPlayerChoice(event);
-    let computerSelection = getComputerChoice();
-    return {
-        playerChoice: playerSelection,
-        computerChoice: computerSelection
-    };
+function playGame(){
+    let rounds = 1;
+    buttons.forEach((button) => {
+        button.addEventListener('click',function(event){
+            if(rounds<6){
+                console.log("Round "+rounds)
+                let playerChoice =  getPlayerChoice(event);
+                let computerChoice =  getComputerChoice(event);
+                let result = playOneRound(playerChoice,computerChoice)
+                console.log("Player : "+playerChoice)
+                console.log("Computer : "+computerChoice)
+                console.log("Result for " + playerChoice + " vs " + computerChoice + ": " + result);
+                rounds++;
+            }
+            if(rounds===6){
+                buttons.forEach(button => {
+                    button.removeEventListener('click', this);
+                });
+                console.log("Game over. 5 rounds played.");
+            }
+        })    
+    });
 }
-function showBothChoices(bothChoices){
-    console.log("Player Choice: " + bothChoices.playerChoice);
-    console.log("Computer Choice : " + bothChoices.computerChoice);
-    
-}
-
-function playOneRound(event){
-    let Choices = getBothChoices(event);
-    let playerSelection = Choices.playerChoice
-    let computerSelection  = Choices.computerChoice
-    console.log("player Choice : "+playerSelection)
-    console.log("computer Choice  : "+computerSelection)
+function playOneRound(playerSelection, computerSelection){
     // Logic to determine the winner of one round
-    if (playerSelection === computerSelection) {
-        return "It's a tie!";
-    } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
-               (playerSelection === "paper" && computerSelection === "rock") ||
-               (playerSelection === "scissors" && computerSelection === "paper")) {
-        console.log("You win!");
-    } else {
-        console.log("Computer wins!");
+    if(computerSelection === playerSelection){
+        return 'Round Tie ! ';
+    } else if(computerSelection === 'Rock'){
+        if(playerSelection === 'Paper'){
+            return 'Player Wins !';
+        }if(playerSelection === 'Scissors'){
+            return 'Computer Wins !';
+        }
+    }else if(computerSelection === 'Paper'){
+        if(playerSelection === 'Rock'){
+            return 'Computer Wins !';
+        }if(playerSelection === 'Scissors'){
+            return 'Player Wins !';
+        }
+    }else if(computerSelection === 'Scissors'){
+        if(playerSelection === 'Rock'){
+            return 'Player Wins !';
+        }if(playerSelection === 'Paper'){
+            return 'Computer Wins !';
+        }
     }
 }
-buttons.forEach((button) => {
-    button.addEventListener('click',playOneRound)    
-});
+
+playGame();
