@@ -37,7 +37,7 @@ function playGame(){
     let computerScore = 0;
     buttons.forEach((button) => {
         button.addEventListener('click',function(event){
-            if(rounds<=6){
+            while(playerScore!== 5 || computerScore !==5){
                 let playerChoice =  getPlayerChoice(event);
                 let computerChoice =  getComputerChoice(event);
                 let result = playOneRound(playerChoice,computerChoice)
@@ -53,16 +53,15 @@ function playGame(){
                                   "<br>Score : "+playerScore+" - "+computerScore;
                 rounds++;
             }
-            if(rounds===7){
-                score.setAttribute('style','text-align:center;')
+            score.setAttribute('style','text-align:center;')
                 if(playerScore>computerScore){
-                    score.innerHTML = "Soory <br>Game Over ! <br>5 Rounds played ! <br>"+"<br>Score : "+playerScore+" - "+computerScore+
+                    score.innerHTML = "Game Over"+"<br>Score : "+playerScore+" - "+computerScore+
                                 "<br>"+"Player Wins !"
                 } else if(playerScore<computerScore){
-                    score.innerHTML = "5 Rounds played ! <br>"+"<br>Score : "+playerScore+" - "+computerScore+
+                    score.innerHTML = "Game Over"+"<br>Score : "+playerScore+" - "+computerScore+
                                 "<br>"+"Computer Wins !"
                 } else {
-                    score.innerHTML = "5 Rounds played ! <br>"+"<br>Score : "+playerScore+" - "+computerScore+
+                    score.innerHTML = "Game Over"+"<br>Score : "+playerScore+" - "+computerScore+
                                 "<br>"+"Tie Game !"
                 }
                 buttons.forEach(button => {
