@@ -37,7 +37,7 @@ function playGame(){
     let computerScore = 0;
     buttons.forEach((button) => {
         button.addEventListener('click',function(event){
-            if(rounds<=6){
+            if(rounds<5){
                 let playerChoice =  getPlayerChoice(event);
                 let computerChoice =  getComputerChoice(event);
                 let result = playOneRound(playerChoice,computerChoice)
@@ -52,27 +52,28 @@ function playGame(){
                 score.innerHTML = "Round "+rounds+"<br> "+"Player : "+playerChoice+"<br>Computer : "+computerChoice+
                                   "<br>Score : "+playerScore+" - "+computerScore;
                 rounds++;
-            }
-            if(rounds===7){
+                console.log(playerScore+"<br>"+computerScore)
+            } else if(rounds>=5){
                 score.setAttribute('style','text-align:center;')
                 if(playerScore>computerScore){
-                    score.innerHTML = "Soory <br>Game Over ! <br>5 Rounds played ! <br>"+"<br>Score : "+playerScore+" - "+computerScore+
+                    score.innerHTML = "5 Rounds Played"+"<br>Score : "+playerScore+" - "+computerScore+
                                 "<br>"+"Player Wins !"
+                                console.log(playerScore+"<br>"+computerScore)
                 } else if(playerScore<computerScore){
-                    score.innerHTML = "5 Rounds played ! <br>"+"<br>Score : "+playerScore+" - "+computerScore+
+                    score.innerHTML = "5 Rounds Played"+"<br>Score : "+playerScore+" - "+computerScore+
                                 "<br>"+"Computer Wins !"
                 } else {
-                    score.innerHTML = "5 Rounds played ! <br>"+"<br>Score : "+playerScore+" - "+computerScore+
+                    score.innerHTML = "5 Rounds Played"+"<br>Score : "+playerScore+" - "+computerScore+
                                 "<br>"+"Tie Game !"
                 }
                 buttons.forEach(button => {
                     button.removeEventListener('click', this);
                 });
-                console.log("Game over. 5 rounds played.");
             }
+            
+            })
         })    
-    });
-}
+ }
 function playOneRound(playerSelection, computerSelection){
     // Logic to determine the winner of one round
     if(computerSelection === playerSelection){
