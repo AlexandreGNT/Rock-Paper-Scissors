@@ -1,4 +1,5 @@
 const container = document.querySelector('#container')
+// buttons & Game Creation 
 const buttons = document.querySelectorAll('button')
 function getComputerChoice(){
     let choicesArray = ['Rock','Paper','Scissors'];
@@ -57,5 +58,4 @@ function playOneRound(playerSelection, computerSelection){
         }
     }
 }
-
 playGame();
